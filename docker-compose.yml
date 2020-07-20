@@ -11,8 +11,13 @@ services:
 
   keycloak:
     image: quay.io/keycloak/keycloak:10.0.2
+    volumes:
+      - ./keycloak-imports:/opt/jboss/keycloak/imports
+#    command:
+#      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
+      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm-export.json
     ports:
       - "8080:8080"

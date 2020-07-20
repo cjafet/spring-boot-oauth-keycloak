@@ -1,62 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Get Token Page - Console</title>
+    <title> Protected Customer Resource</title>
 </head>
 <body>
-Press the following button to start the implicit flow. <br>
-<button id="authorize" type="button">Authorize</button>
-<div id="box"></div>
-<span th:text="${state}"></span>
+<span th:text="${principal.name}"></span>
+
+<a href="/logout">logout</a>
+<span th:text="${logout}"></span>
+
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" th:inline="javascript">
 
-    var data = "client_id=client-id&username=your-user-name&password=your-password&grant_type=password";
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-
-    xhr.addEventListener("readystatechange", function () {
-    if (this.readyState === 4) {
-      var data = JSON.parse(this.responseText);
-      console.log(data.access_token);
-      console.log(data.scope);
-    }
-    });
-
-    xhr.open("POST", "http://localhost:8088/auth/realms/your-realm/protocol/openid-connect/token");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    /*xhr.setRequestHeader("Cache-Control", "no-cache");
-    xhr.setRequestHeader("Postman-Token", "5882ef4d-2b97-4d84-9ca0-e1aa15a58146");
-    */
-
-    xhr.send(data);
-    /*<![CDATA[*/
-
-    $(document).ready(function() {
-        $("#authorize").click(makeRequest);
-    });
-    function makeRequest() {
-        var auth_endpoint = "http://localhost:8088/auth/realms/your-realm/protocol/openid-connect/token",
-            response_type = "token",
-            realm = "your-realm",
-            client_id = "client-id",
-            username = "your-user-name",
-            password = "your-password",
-            grant_type = "password",
-            redirect_uri = "http://localhost:5005/callback",
-            scope = "public_profile user_friends";
-
-            var request_endpoint = auth_endpoint + "?" +
-            "realm=" + realm + "&" +
-            "client_id=" + client_id + "&" +
-            "username=" + username + "&" +
-            "password=" + password + "&" +
-            "grant_type=" + grant_type;
-
-            window.location.href = request_endpoint;
-    }
-    /*]]>*/
-</script>
 </html>

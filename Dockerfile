@@ -15,4 +15,4 @@ ENTRYPOINT ["java", "-jar", "/app/oauth-1.0-SNAPSHOT.jar"]
 # docker build -t username/java-keycloak .
 # docker build -f java.dockerfile -t username/java-keycloak .
 
-# docker run -d -p 8080:5005 cjafet/java-keycloak
+# docker run -d -p 5005:5005 cjafet/java-keycloak
